@@ -61,8 +61,8 @@ public class SheparFaireyLab
     me.explore();
 
     //-----------------------------------------------------
-    
     //method 2
+    
     int s = 255;
     int b = 0;
     
@@ -101,30 +101,29 @@ public class SheparFaireyLab
     
     for (int i = 0; i < pixels.length; i++) {
         Pixel p = pixels[i];
-   
-        if (i < bucketsize1) {
+        red = p.getRed();
+        if (red < bucketsize1) {
             p.setRed(0);
             p.setGreen(50);
             p.setBlue(75);
         }
-        else if (i > bucketsize1 && i < bucketsize2) {
+        else if (red < bucketsize2) {
             p.setRed(220);
             p.setGreen(25);
             p.setBlue(35);
         }
-        else if (i > bucketsize2 && i < bucketsize3) {
+        else if (red < bucketsize3) {
             p.setRed(110);
             p.setGreen(150);
             p.setBlue(160);
         }
-        else if (i > bucketsize3) {
+        else if (red < bucketsize4) {
             p.setRed(250);
             p.setGreen(230);
             p.setBlue(165);
         }
     }
     
-
     
     me.explore();
     
