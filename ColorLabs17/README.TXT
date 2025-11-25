@@ -4,9 +4,9 @@ Tell the reader (someone who does not know anything about this project)
 all he/she needs to know. The comments should usually include at least:
 ------------------------------------------------------------------------
 
-PROJECT TITLE:
-PURPOSE OF PROJECT:
-VERSION or DATE:
+PROJECT TITLE: Shepard Fairey Lab
+PURPOSE OF PROJECT: This program takes in a photo and edits it to only use 4 colors
+VERSION or DATE: 
 HOW TO START THIS PROJECT:
-AUTHORS:
+AUTHORS: Finn Landek
 USER INSTRUCTIONS:
