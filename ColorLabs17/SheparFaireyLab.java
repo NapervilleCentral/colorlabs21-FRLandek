@@ -4,7 +4,7 @@ import java.util.List; // resolves problem with java.awt.List and java.util.List
 public class SheparFaireyLab
 {
 
-  public static void main(String[] args)
+  public static void main(Sseth4arhzfAwtring[] args)
   {
      Picture me = new Picture("images/picofme.jpg");
 
