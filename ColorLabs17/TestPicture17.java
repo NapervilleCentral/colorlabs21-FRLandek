@@ -13,7 +13,10 @@ public class TestPicture17
 {
     static Picture temple = new Picture("images\\temple.jpg");
     static Picture apic = new Picture("images\\extreme.jpg");
+    //static Picture apic = new Picture("images\\extreme_trans.png");
     static Picture canvas = new Picture("images\\7inX95in.jpg");
+    //static Picture canvas = new Picture("images\\canvas.png");
+    static int off;
     /**
      * main method, to test the picture
      *
@@ -41,8 +44,10 @@ public class TestPicture17
      //temple.explore();//!!!!!!!!!!!!!!!!!!!!!!!!!displays the picture
      apic.explore();
      copytoCanvas(apic, canvas, 0, 0);
-     canvas.explore();
      copytoCanvas(apic, canvas, 240, 0);
+     recursiveShrink(apic, canvas, 240, 0, 1);
+     negate(apic, canvas, 0, 200);
+     canvas.explore();
      //ferris1.explore();
      //moto.explore();
      
@@ -176,6 +181,44 @@ final double  FACTOR = .5;
               rightPixel = apic.getPixel(width - 1 -x, y);
               rightPixel.setColor(leftPixel.getColor());
             }
+      }
+  }
+  public static void recursiveShrink(Picture source, Picture target, int x, int y, int add) {
+      Pixel sourcePix = null;
+      Pixel targetPix = null;
+      
+      add *= 2;
+      System.out.println("shrink");
+    
+      if (add <= 10) {
+          //loop thru the columns (targetX is the starting point on Canvas)
+          for (int sourceX = 0, targetX = x; sourceX < source.getWidth(); sourceX+=add, targetX++) {
+              //loop thru the rows
+              for (int sourceY = 0, targetY = y; sourceY < source.getHeight(); sourceY+=add, targetY++) {
+                  sourcePix = source.getPixel(sourceX,sourceY);
+                  targetPix = target.getPixel(targetX, targetY);
+                  targetPix.setColor(sourcePix.getColor());
+              }
+          }
+          recursiveShrink(source, target, x, y, add);
+      }
+
+  }
+  public static void negate(Picture source, Picture target, int x, int y) {
+      Pixel sourcePix = null;
+      Pixel targetPix = null;
+    
+      //loop thru the columns (targetX is the starting point on Canvas)
+      for (int sourceX = 0, targetX = x; sourceX < source.getWidth(); sourceX++, targetX++) {
+          //loop thru the rows
+          for (int sourceY = 0, targetY = y; sourceY < source.getHeight(); sourceY++, targetY++) {
+              sourcePix = source.getPixel(sourceX,sourceY);
+              targetPix = target.getPixel(targetX, targetY);
+              int r = 255 - sourcePix.getRed();
+              int g = 255 - sourcePix.getGreen();
+              int b = 255 - sourcePix.getBlue();
+              targetPix.setColor(new Color(r,g,b));
+          }
       }
   }
   /**
