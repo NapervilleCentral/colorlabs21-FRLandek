@@ -23,22 +23,129 @@ public class TestPicture17
      */
   public static void main(String[] args)
   {
+      //opens picture using a dialog box
+      /*
+     String fileName = FileChooser.pickAFile();
+     Picture pictObj = new Picture(fileName);
+     pictObj.explore();*/
+
+     //opens a pictue using a path
+     //Picture apic = new Picture("C:\\Users\\khayes\\Favorites\\Documents\APCS- Java\chap03\Curriclum 2013\Picture Color labs\images\\beach.jpg");
+     
+     
+     //relative path             dir/folder/file
+     
+     //Picture ferris1 = new Picture("images/2000 ferris wheel2.jpg");
+     //Picture moto = new Picture("images/blueMotorcycle.jpg");
+     //Picture ferris3 = new Picture("images/2000 ferris wheel2.jpg");
+
+     //temple.explore();
+     //fix(temple);
+     //temple.explore();//!!!!!!!!!!!!!!!!!!!!!!!!!displays the picture
      apic.explore();
      copytoCanvas(apic, canvas, 0, 0);
      copytoCanvas(apic, canvas, 240, 0);
      recursiveShrink(apic, canvas, 240, 0, 1);
      negate(apic, canvas, 480, 0);
      grayscale(apic, canvas, 0, 220);
-     shepherdFairy(canvas, 240, 220);
-     sepia(apic, canvas, 480, 220);
-     brighten(apic, canvas, 0, 440, 2);
-     mirrorHorizontal(canvas, 240, 440);
+     canvas.explore();
+     //ferris1.explore();
+     //moto.explore();
+     
+     //to change color of pic get all of the pixels!!!!111 😂✌️
+     //makes an array of pixels
+     Pixel[] pixels;
+     //gets pixels from picture and assigns to pixels array
+     //pixels = ferris1.getPixels();
+    
+     //how many pixels or how large array
+    //System.out.println("This is a large array"+pixels.length  );
 
-    
-    
-    
-    canvas.explore();
 
+    /**/
+        //access each index, array note
+    //System.out.println(pixels[17]);
+    //access each pixel pic.method.getPixel
+    //Pixel spot = ferris1.getPixel(100,100);
+    //Pixel spot50 = ferris1.getPixel(50, 50);
+    Color ltsteel = new Color(176,196,222);
+    
+    //System.out.println(pixels[17].getColor());
+    //System.out.println(spot);
+    
+    //Pixel spot17 = pixels[17];
+    //spot17.setRed(200);
+    //spot17.setBlue(150);
+    //spot17.setGreen(175);
+    
+    
+    //spot.setColor(Color.yellow);
+    //spot50.setColor(ltsteel);
+    //ferris1.explore();
+/*
+    pixels[17].setColor(Color.blue);
+    spot.setColor(new Color(252,252,252));
+    pixels[500034].setColor(Color.blue);
+
+    ferris1.explore();
+/*
+   // loop to access indexes of array or collection
+
+    //for each loop spot  is a ?
+    for (Pixel spot : pixels)
+    System.out.println( spot );
+
+
+   
+ /**/
+
+ /**
+  * Method to clear red from picture
+  * @param none
+  * @return none
+  */
+ /*
+    for (Pixel pixelObj : pixels)
+        {
+            //set the red value of the current pixel to the new value
+           
+
+        }
+    ferris1.explore();
+    
+/**/
+ /**
+  * Method to reduce red from picture by a factor of n
+  * @param none
+  * @return none
+  */
+
+/*
+int value;
+final double  FACTOR = .5;
+    for (Pixel pixelObj : pixels)
+    {
+
+        //get the redvalue
+        value = pixelObj.getRed();
+        //System.out.println(value);
+
+        //decrease the red value by 50%
+        
+        //set the red value of the current pixel to the new value
+        
+
+    }
+    // use new picture when changing or it will make changes to 
+    // pic you already changed
+    ferris1.explore();
+    ferris2.explore();
+
+  /**/ 
+    //write/save a picture as a file
+    //ferris1.write("images/ferris11.jpg");
+
+    /**/
   }//main
   
   public static void fix(Picture apic) {
@@ -76,24 +183,6 @@ public class TestPicture17
               rightPixel.setColor(leftPixel.getColor());
             }
       }
-  }
-  public static void mirrorHorizontal(Picture target, int posX, int posY) {
-      Picture pic = new Picture("images/extreme.jpg");
-      int height = pic.getHeight();
-      int mirrorPoint = height/2;
-      Pixel leftPixel = null;
-      Pixel rightPixel = null;
-      
-      //loop through all the rows
-      for (int y = 0; y < pic.getHeight(); y++) {
-          //loop from 0 to the middle (mirror point)
-          for (int x = 0; x < mirrorPoint; x++) {
-              leftPixel = pic.getPixel(y,x);
-              rightPixel = pic.getPixel(y, height - x -1);
-              rightPixel.setColor(leftPixel.getColor());
-          }
-      }
-      copytoCanvas(pic, target, posX, posY);
   }
   public static void recursiveShrink(Picture source, Picture target, int x, int y, int add) {
       Pixel sourcePix = null;
@@ -146,38 +235,6 @@ public class TestPicture17
           }
       }
   }
-  public static void sepia(Picture source, Picture target, int x, int y) {
-      Pixel sourcePix = null;
-      Pixel targetPix = null;
-      //loop thru the columns (targetX is the starting point on Canvas)
-      for (int sourceX = 0, targetX = x; sourceX < source.getWidth(); sourceX++, targetX++) {
-          //loop thru the rows
-          for (int sourceY = 0, targetY = y; sourceY < source.getHeight(); sourceY++, targetY++) {
-              sourcePix = source.getPixel(sourceX,sourceY);
-              targetPix = target.getPixel(targetX, targetY);
-              int r = Math.min((int)(sourcePix.getRed() * .393) + (int)(sourcePix.getGreen() *.769) + (int)(sourcePix.getBlue() * .189), 255);
-              int g = Math.min((int)(sourcePix.getRed() * .349) + (int)(sourcePix.getGreen() *.686) + (int)(sourcePix.getBlue() * .168), 255);
-              int b = Math.min((int)(sourcePix.getRed() * .272) + (int)(sourcePix.getGreen() *.534) + (int)(sourcePix.getBlue() * .131), 255);
-              targetPix.setColor(new Color(r,g,b));
-          }
-      }
-  }
-  public static void brighten(Picture source, Picture target, int x, int y, int scale) {
-      Pixel sourcePix = null;
-      Pixel targetPix = null;
-      //loop thru the columns (targetX is the starting point on Canvas)
-      for (int sourceX = 0, targetX = x; sourceX < source.getWidth(); sourceX++, targetX++) {
-          //loop thru the rows
-          for (int sourceY = 0, targetY = y; sourceY < source.getHeight(); sourceY++, targetY++) {
-              sourcePix = source.getPixel(sourceX,sourceY);
-              targetPix = target.getPixel(targetX, targetY);
-              int r = Math.min(sourcePix.getRed() * scale, 255);
-              int g = Math.min(sourcePix.getGreen() * scale, 255);
-              int b = Math.min(sourcePix.getBlue() * scale, 255);
-              targetPix.setColor(new Color(r,g,b));
-          }
-      }
-  }
   /**
    * add two ints to params and place you want target to go onto the canvas
    */
@@ -195,77 +252,4 @@ public class TestPicture17
           }
       }
   }
-  public static void shepherdFairy(Picture target, int x, int y) {
-    Picture me = new Picture("images/extreme.jpg");
-      
-      Pixel[] pixels;
-    pixels = me.getPixels();
-    
-     int red;
-     int green;
-     int blue;
-     int avg;
-    
-    int bucketsize = pixels.length / 4;
-    int s = 255;
-    int b = 0;
-    
-    
-    for (Pixel pixelObj : pixels) {
-        red = pixelObj.getRed();
-        green = pixelObj.getGreen();
-        blue = pixelObj.getBlue();
-        avg = (int)((red + green + blue) / 3);
-        pixelObj.setRed(avg);
-        pixelObj.setGreen(avg);
-        pixelObj.setBlue(avg);
-    }
-    pixels = me.getPixels();
-    
-    Arrays.sort(pixels, (p1, p2) -> Integer.compare(sum(p1), sum(p2)));
-    
-    for (Pixel pixelObj : pixels) {
-        red = pixelObj.getRed();
-        if (red < s) {
-            s = red;
-        }
-        if (red > b) {
-            b = red;
-        }
-    }
-
-    int bucketsize1 = (b - s) / 4;
-    int bucketsize2 = ((b - s) / 4) * 2;
-    int bucketsize3 = ((b - s) / 4) * 3;
-    int bucketsize4 = ((b - s) / 4) * 4;
-    
-    
-    for (int i = 0; i < pixels.length; i++) {
-        Pixel p = pixels[i];
-        red = p.getRed();
-        if (red < bucketsize1) {
-            p.setRed(0);
-            p.setGreen(50);
-            p.setBlue(75);
-        }
-        else if (red < bucketsize2) {
-            p.setRed(220);
-            p.setGreen(25);
-            p.setBlue(35);
-        }
-        else if (red < bucketsize3) {
-            p.setRed(110);
-            p.setGreen(150);
-            p.setBlue(160);
-        }
-        else if (red < bucketsize4) {
-            p.setRed(250);
-            p.setGreen(230);
-            p.setBlue(165);
-        }
-    }
-    
-    copytoCanvas(me, canvas, x, y);
-  }
-  public static int sum(Pixel px) { return px.getRed() + px.getBlue() + px.getGreen(); }
 }//class
