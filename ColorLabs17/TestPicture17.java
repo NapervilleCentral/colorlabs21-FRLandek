@@ -32,12 +32,14 @@ public class TestPicture17
      shepherdFairy(canvas, 240, 220);
      sepia(apic, canvas, 480, 220);
      brighten(apic, canvas, 0, 440, 2);
-     mirrorHorizontal(canvas, 240, 440);
+     mirrorVertical(canvas, 240, 440);
+     darken(apic, canvas, 480, 440, 2);
 
     
     
     
     canvas.explore();
+    canvas.write("images/finalcollage.jpg");
 
   }//main
   
@@ -57,27 +59,7 @@ public class TestPicture17
           }
       }
   }
-  /**
-   * Method to mirror around a vertical line in the middle of the
-   * picture based on the width
-   */
-  public static void mirrorVertical() {
-      int width = apic.getWidth();
-      int mirrorPoint = 267;
-      Pixel leftPixel = null;
-      Pixel rightPixel = null;
-      
-      //loop through all the rows
-      for (int y = 0; y < apic.getHeight(); y++) {
-          //loop from 0 to the middle (mirror point)
-          for (int x = 0; x < mirrorPoint; x++) {
-              leftPixel = apic.getPixel(x,y);
-              rightPixel = apic.getPixel(width - 1 -x, y);
-              rightPixel.setColor(leftPixel.getColor());
-            }
-      }
-  }
-  public static void mirrorHorizontal(Picture target, int posX, int posY) {
+  public static void mirrorVertical(Picture target, int posX, int posY) {
       Picture pic = new Picture("images/extreme.jpg");
       int height = pic.getHeight();
       int mirrorPoint = height/2;
@@ -158,6 +140,22 @@ public class TestPicture17
               int r = Math.min((int)(sourcePix.getRed() * .393) + (int)(sourcePix.getGreen() *.769) + (int)(sourcePix.getBlue() * .189), 255);
               int g = Math.min((int)(sourcePix.getRed() * .349) + (int)(sourcePix.getGreen() *.686) + (int)(sourcePix.getBlue() * .168), 255);
               int b = Math.min((int)(sourcePix.getRed() * .272) + (int)(sourcePix.getGreen() *.534) + (int)(sourcePix.getBlue() * .131), 255);
+              targetPix.setColor(new Color(r,g,b));
+          }
+      }
+  }
+  public static void darken(Picture source, Picture target, int x, int y, int scale) {
+      Pixel sourcePix = null;
+      Pixel targetPix = null;
+      //loop thru the columns (targetX is the starting point on Canvas)
+      for (int sourceX = 0, targetX = x; sourceX < source.getWidth(); sourceX++, targetX++) {
+          //loop thru the rows
+          for (int sourceY = 0, targetY = y; sourceY < source.getHeight(); sourceY++, targetY++) {
+              sourcePix = source.getPixel(sourceX,sourceY);
+              targetPix = target.getPixel(targetX, targetY);
+              int r = sourcePix.getRed() / scale;
+              int g = sourcePix.getGreen() / scale;
+              int b = sourcePix.getBlue() / scale;
               targetPix.setColor(new Color(r,g,b));
           }
       }
